@@ -573,66 +573,196 @@ for (let i = 0; i < 18; i++) {
   container.appendChild(p);
 }
 
-/* chatbot */
-const SYSTEM = `Speak in a calm, friendly, respectful, and mostly formal manner. Do not exaggerate achievements, emotions, events, or abilities. Avoid excessive praise, over-the-top compliments, dramatic reactions, unrealistic claims, or roleplay. Do not use sarcasm, mockery, teasing, or overly humorous responses unless specifically requested. Keep humour light, natural, and occasional.
-
-Respond in a balanced and realistic way. When talking about Tamsi, appreciate her qualities honestly without making unbelievable claims. Do not describe ordinary events as historic, legendary, world-famous, or extraordinary. Use clear, natural, and thoughtful language. Focus on meaningful conversations, memories, achievements, hobbies, friendships, and personal growth rather than exaggerated storytelling.
-
-You know a lot about Tamsi. She is 13 years old and is known for her talents in cooking, dancing, singing, drawing, crafts, academics, music, and sports. She is kind, supportive, intelligent, hardworking, and loved by many people. She sometimes gets angry quickly, but she cools down just as quickly and has a caring and compassionate heart.
-
-About Tamsi's supportive nature: She celebrates achievements with her friends, congratulates them when they win, and supports them whenever they lose. No matter what happens, she is always by their side, and that is something very special.
-
-You know that Tamsi and her best friend Varshitha have been friends for 8 years. They spend hours talking on phone calls, share countless memories, laugh together, argue over silly things, tease each other, and always become friends again. Their friendship is built on trust, care, understanding, loyalty, support, and genuine affection.
-
-One of the most cherished memories between Tamsi and Varshitha is from Varshitha's birthday. Tamsi and her mother came to Varshitha's house as a surprise, and Varshitha was incredibly happy to see them. They brought many thoughtful gifts, but more than the gifts, it was their presence that made the day truly special. They spent hours together talking, laughing, sharing stories, and enjoying each other's company. It was a day filled with happiness, warmth, and beautiful memories. Even today, whenever Varshitha thinks about it, it brings a smile to her face. It remains one of the most special memories of their friendship. Another wonderful part of this friendship is the bond between their families. Tamsi's mother, Gowtami Aunty, is very friendly and kind — she always makes everyone feel comfortable and welcome, and has become a familiar and important part of many of their memories. Gowtami Aunty and Varshitha's mother are also good friends. Their friendship has brought both families closer together and has made Tamsi and Varshitha's bond even stronger.
-
-You enjoy talking about Tamsi's achievements, hobbies, interests, talents, birthday celebrations, memories, and friendships. Your goal is to make conversations enjoyable, informative, and meaningful.
-
-When users ask about Tamsi, respond positively, honestly, and warmly. When users ask for advice, be encouraging, thoughtful, and practical. When users want a casual conversation, respond naturally as a friendly and intelligent companion.
-
-Always maintain a kind, respectful, trustworthy, and optimistic personality. Never be rude, overly dramatic, overly emotional, sarcastic, or unrealistic. Do not add any information beyond what is provided. Do not make assumptions, invent details, or include extra facts. Avoid exaggeration, sarcasm, dramatic statements, unrealistic praise, or excessive humour. Keep responses balanced, accurate, natural, and respectful. Use a formal and professional tone while remaining warm and friendly.
-
-STRICT RULES:
-- Reply in a friendly, formal, and professional tone
-- Keep responses short, clear, and to the point — 2 to 4 sentences maximum
-- NEVER use actions like *laughs* or *smiles*
-- NEVER say things like "laughs out loud" or describe your own actions
-- NEVER invent or assume information not given to you
-- NEVER add unnecessary details or go off-topic
-- Do NOT use slang or casual language
-- If you do not know something, politely say "I am not sure about that"
-- Only talk about Tamsi and topics directly related to her`;
+/* chatbot - NO API VERSION */
 
 let history = [];
 
-async function sendMsg() {
+function getReply(text) {
+  const q = text.toLowerCase().trim();
+
+  /* TALENTS */
+  if (
+    q.includes('talent') ||
+    q.includes('good at') ||
+    q.includes('skills') ||
+    q.includes('what can tamsi do')
+  ) {
+    return "Tamsi is talented in many areas. She enjoys cooking, dancing, singing, drawing, crafts, academics, music, and sports. She is truly a versatile person with many interests.";
+  }
+
+  /* PERSONALITY */
+  if (
+    q.includes('personality') ||
+    q.includes('what is tamsi like') ||
+    q.includes('describe tamsi') ||
+    q.includes('who is tamsi')
+  ) {
+    return "Tamsi is kind, supportive, intelligent, hardworking, caring, and compassionate. She can sometimes get angry quickly, but she also cools down quickly and has a genuinely caring heart.";
+  }
+
+  /* FRIENDSHIP */
+  if (
+    q.includes('friendship') ||
+    q.includes('best friend') ||
+    q.includes('how long') ||
+    q.includes('8 years') ||
+    q.includes('eight years') ||
+    q.includes('varshitha and tamsi')
+  ) {
+    return "Tamsi and Varshitha have been best friends for 8 years. They have shared countless conversations, memories, laughs, little arguments, and many ups and downs, while always supporting each other.";
+  }
+
+  /* SUPPORT */
+  if (
+    q.includes('support') ||
+    q.includes('supportive') ||
+    q.includes('help') ||
+    q.includes('there for')
+  ) {
+    return "Tamsi is very supportive of the people she cares about. She celebrates her friends' achievements, encourages them when things do not go well, and stays by their side through both good and difficult moments.";
+  }
+
+  /* BEST MEMORY */
+  if (
+    q.includes('memory') ||
+    q.includes('best memory') ||
+    q.includes('birthday surprise') ||
+    q.includes('surprise')
+  ) {
+    return "One of Varshitha's most cherished memories with Tamsi is when Tamsi and her mother came to Varshitha's house as a birthday surprise. They brought thoughtful gifts and spent hours talking, laughing, and enjoying time together.";
+  }
+
+  /* FAMILY */
+  if (
+    q.includes('gowtami') ||
+    q.includes('aunty') ||
+    q.includes('mother') ||
+    q.includes('family')
+  ) {
+    return "Tamsi's mother, Gowtami Aunty, is a warm and kind person who has become an important part of many memories. She and Varshitha's mother are also good friends, which has brought both families closer.";
+  }
+
+  /* COOKING */
+  if (q.includes('cook') || q.includes('cooking') || q.includes('food')) {
+    return "Cooking is one of Tamsi's talents. It is one of the many things she enjoys and is good at.";
+  }
+
+  /* DANCING */
+  if (q.includes('dance') || q.includes('dancing')) {
+    return "Tamsi is talented at dancing. It is one of the many creative things she enjoys.";
+  }
+
+  /* SINGING / MUSIC */
+  if (
+    q.includes('sing') ||
+    q.includes('singing') ||
+    q.includes('music')
+  ) {
+    return "Tamsi has a talent for singing and a love for music. It is one of the many creative sides of her personality.";
+  }
+
+  /* DRAWING / CRAFTS */
+  if (
+    q.includes('draw') ||
+    q.includes('drawing') ||
+    q.includes('craft')
+  ) {
+    return "Tamsi is creative and talented at drawing and crafts. These are some of the many ways she expresses her creativity.";
+  }
+
+  /* ACADEMICS */
+  if (
+    q.includes('academic') ||
+    q.includes('study') ||
+    q.includes('studies') ||
+    q.includes('school')
+  ) {
+    return "Tamsi is hardworking and intelligent, and academics are one of her strengths. She is someone who puts effort into the things she cares about.";
+  }
+
+  /* SPORTS */
+  if (
+    q.includes('sport') ||
+    q.includes('sports') ||
+    q.includes('game')
+  ) {
+    return "Sports are another one of Tamsi's interests. She has many different talents and interests, which is what makes her so versatile.";
+  }
+
+  /* BIRTHDAY */
+  if (
+    q.includes('birthday') ||
+    q.includes('wish') ||
+    q.includes('today')
+  ) {
+    return "Happy Birthday, Tamsi! 🎂 I hope your life is filled with happiness, love, beautiful memories, and everything you dream of. You deserve many wonderful moments ahead.";
+  }
+
+  /* VARSHITHA */
+  if (
+    q.includes('varshitha') ||
+    q.includes('who made') ||
+    q.includes('who created')
+  ) {
+    return "Varshitha is Tamsi's best friend of 8 years. Their friendship is filled with laughter, conversations, memories, occasional fights, support, and genuine care for each other.";
+  }
+
+  /* HELLO */
+  if (
+    q === 'hi' ||
+    q === 'hello' ||
+    q === 'hey' ||
+    q.includes('hello ai') ||
+    q.includes('hi ai')
+  ) {
+    return "Hello! 🎀 I am Forever Friend AI. You can ask me about Tamsi, her talents, personality, friendships, or special memories.";
+  }
+
+  /* THANK YOU */
+  if (
+    q.includes('thank you') ||
+    q.includes('thanks')
+  ) {
+    return "You are very welcome! I am always happy to share something about Tamsi and the beautiful memories connected to her.";
+  }
+
+  /* LOVE / SWEET QUESTIONS */
+  if (
+    q.includes('special') ||
+    q.includes('why do people like') ||
+    q.includes('why is she')
+  ) {
+    return "Tamsi is special because of the combination of her kindness, supportive nature, talents, and the genuine care she shows toward the people around her.";
+  }
+
+  /* DEFAULT */
+  return "I know quite a bit about Tamsi, but I am not sure about that particular question. Try asking me about her talents, personality, friendship with Varshitha, family, or a special memory.";
+}
+
+function sendMsg() {
   const input = document.getElementById('userInput');
   const text = input.value.trim();
+
   if (!text) return;
+
   input.value = '';
+
   addMsg(text, 'user');
-  history.push({ role: 'user', content: text });
+
   const loader = addMsg('Thinking...', 'loading');
-  try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        system: SYSTEM,
-        messages: history
-      })
+
+  setTimeout(function() {
+    loader.remove();
+
+    const reply = getReply(text);
+
+    addMsg(reply, 'bot');
+
+    history.push({
+      user: text,
+      bot: reply
     });
-    const data = await res.json();
-    const reply = (data.content || []).map(b => b.text || '').join('');
-    loader.remove();
-    addMsg(reply || 'I am sorry, I could not process that. Please try again.', 'bot');
-    history.push({ role: 'assistant', content: reply });
-  } catch(e) {
-    loader.remove();
-    addMsg('Something went wrong. Please try again shortly.', 'bot');
-  }
+  }, 350);
 }
 
 function sendSug(text) {
